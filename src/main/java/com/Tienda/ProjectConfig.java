@@ -20,11 +20,11 @@ public class ProjectConfig implements WebMvcConfigurer{
     public LocaleResolver localeResolver(){
         var slr= new SessionLocaleResolver();
         slr.setDefaultLocale(Locale.getDefault());
-        slr.setLocaleAttributeName("session.currente.timezone");
-        slr.setTimeZoneAttributeName("session.currente.timezone");       
+        slr.setLocaleAttributeName("session.current.locale");
+        slr.setTimeZoneAttributeName("session.current.timezone");       
         return slr;
     }
-
+    
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         var lci = new LocaleChangeInterceptor();
