@@ -18,4 +18,6 @@ public interface CategoriaService {
     //Se elimina resgistro por su idCategoria
     public void delete(Categoria categoria);
 
+    
+    public List<Categoria> getPorDescripcion(String descripcion);
 }
