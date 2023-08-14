@@ -29,9 +29,12 @@ public class UsuarioDetailServiceImpl implements UsuarioDetailsService, UserDeta
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("Attempting to load user: " + username);
+
         Usuario usuario = usuarioDao.findByUsername(username);
 
         if (usuario == null) {
+            System.out.println("User not found: " + username);
             throw new UsernameNotFoundException(username);
         }
 
@@ -41,8 +44,11 @@ public class UsuarioDetailServiceImpl implements UsuarioDetailsService, UserDeta
         var roles = new ArrayList<GrantedAuthority>();
 
         for (Rol rol : usuario.getRoles()) {
+            System.out.println("Assigned role: " + rol.getNombre());
             roles.add(new SimpleGrantedAuthority(rol.getNombre()));
         }
+
+        System.out.println("User authenticated successfully: " + username);
 
         return new User(usuario.getUsername(), usuario.getPassword(), roles);
     }
